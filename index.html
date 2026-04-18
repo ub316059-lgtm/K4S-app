@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <title>K4S v6.1</title>
+  <link rel="manifest" href="data:application/manifest+json,{&quot;name&quot;:&quot;K4S v6.1&quot;,&quot;short_name&quot;:&quot;K4S&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#0f172a&quot;,&quot;theme_color&quot;:&quot;#0f172a&quot;}">
+  <style>
+    body{margin:0;font-family:sans-serif;background:#0f172a;color:#e2e8f0;display:grid;place-items:center;min-height:100vh}
+    .box{text-align:center;padding:20px}
+    h1{font-size:2rem;margin:0 0 10px}
+    p{opacity:.7}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>K4S v6.1</h1>
+    <p>Offline Ready ✅</p>
+  </div>
+  <script>
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
+</body>
+</html>
