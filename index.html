@@ -5,23 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0f172a">
   <title>K4S v6.1</title>
-  <link rel="manifest" href="data:application/manifest+json,{&quot;name&quot;:&quot;K4S v6.1&quot;,&quot;short_name&quot;:&quot;K4S&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#0f172a&quot;,&quot;theme_color&quot;:&quot;#0f172a&quot;}">
   <style>
-    body{margin:0;font-family:sans-serif;background:#0f172a;color:#e2e8f0;display:grid;place-items:center;min-height:100vh}
-    .box{text-align:center;padding:20px}
-    h1{font-size:2rem;margin:0 0 10px}
-    p{opacity:.7}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
+    body{background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;justify-content:center;padding:20px}
+    .box{width:100%;max-width:400px}
+    h1{text-align:center;margin:16px 0}
+    .card{background:#1e293b;padding:20px;border-radius:16px;border:1px solid #334155}
+    input{width:100%;padding:14px;background:#0f172a;border:1px solid #475569;border-radius:10px;color:#fff;font-size:18px;text-align:center;margin:12px 0}
+    button{width:100%;padding:14px;background:#3b82f6;border:none;border-radius:10px;color:#fff;font-size:16px;font-weight:600;margin:6px 0}
+    .hasil{background:#0f172a;padding:16px;border-radius:10px;margin-top:12px;white-space:pre-wrap;line-height:1.6}
+    .row{display:flex;gap:8px}
+    .row button{flex:1;background:#475569}
+    .footer{text-align:center;margin-top:20px;font-size:12px;color:#64748b}
   </style>
 </head>
 <body>
   <div class="box">
     <h1>K4S v6.1</h1>
-    <p>Offline Ready ✅</p>
+    <div class="card">
+      <p>Masukkan 4 angka keberuntungan:</p>
+      <input type="number" id="angka" placeholder="Contoh: 1234" maxlength="4">
+      <button onclick="prediksi()">Buat Prediksi</button>
+      <div id="hasil" class="hasil" style="display:none"></div>
+      <div id="tombol" class="row" style="display:none">
+        <button onclick="salin()">Salin</button>
+        <button onclick="share()">Bagikan</button>
+      </div>
+    </div>
+    <div class="footer">Offline Ready ✅</div>
   </div>
-  <script>
-    if('serviceWorker' in navigator){
-      navigator.serviceWorker.register('./sw.js');
-    }
-  </script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js')}
+let hasilText = '';
+function prediksi(){
+  const a = document.getElementById('angka').value;
+  if(a.length !== 4) return alert('Harus 4 angka bro!');
+  const n = parseInt(a);
+  const shio = ['Tikus','Kerbau','Macan','Kelinci','Naga','Ular','Kuda','Kambing','Monyet','Ayam','Anjing','Babi'];
+  hasilText = `🎯 PREDIKSI K4S v6.1\n\nInput: ${a}\nShio: ${shio[n%12]}\nAngka Main: ${n%10}${(n+3)%10}${(n+7)%10}D\nColok Bebas: ${n%10}/${(n+1)%10}\n\n*Disclaimer: Hiburan saja*`;
+  document.getElementById('hasil').innerText = hasilText;
+  document.getElementById('hasil').style.display = 'block';
+  document.getElementById('tombol').style.display = 'flex';
+}
+function salin(){navigator.clipboard.writeText(hasilText);alert('Udah disalin bro!')}
+function share(){navigator.share?navigator.share({text:hasilText}):salin()}
+</script>
 </body>
 </html>
