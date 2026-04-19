@@ -4,11 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>K4S - Koperasi Syariah Empat Sekawan</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#14b8a6">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="K4S">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--primary:#14b8a6;--primary-light:#d1fae5;--primary-soft:#ecfdf5;--secondary:#f59e0b;--danger:#dc2626;--sidebar-width:280px}
@@ -66,16 +61,14 @@ body{
 }
 .sidebar.open{transform:translateX(0)}
 .sidebar.menu-title{
-  margin:16px 0 8px;font-size:12px;color:#666;font-weight:700;
+  margin:24px 0 12px;font-size:12px;color:#666;font-weight:700;
   text-transform:uppercase;width:100%;
 }
-.sidebar.menu-title::before{content:'✅ ';margin-right:4px}
 .sidebar.menu-item{
-  padding:12px;margin:4px 0;border-radius:8px;cursor:pointer;
+  padding:18px 12px;margin:0;border-radius:0;cursor:pointer;
   display:block;width:100%;color:#333;text-decoration:none;font-size:14px;
-  background:#f8fafc;
+  background:#fff;border-bottom:1px solid #e2e8f0;
 }
-.sidebar.menu-item.sub{text-align:center;padding-left:16px;padding-right:16px;font-size:13px}
 .sidebar.menu-item:hover,.sidebar.menu-item.active{background:#ccfbf1;color:var(--primary)}
 .sidebar.close-btn{
   text-align:right;margin-bottom:16px;font-size:28px;cursor:pointer;
@@ -85,29 +78,19 @@ body{
 .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:98}
 .overlay.active{display:block}
 
-.container{max-width:1400px;margin:0 auto;padding:15px 8px}
+.container{max-width:1200px;margin:0 auto;padding:15px 8px}
 .card{
   background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);
   border-radius:14px;padding:12px;margin-bottom:14px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);overflow:hidden;position:relative;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);overflow:hidden
 }
 .card h3{font-size:16px;margin:0 0 12px;color:var(--primary);font-weight:800}
 
-/* WATERMARK SAMAR KOPERASI 4 SEKAWAN */
-.page::after{
-  content:'Koperasi 4 Sekawan';
-  position:fixed;bottom:8px;right:12px;
-  font-size:10px;color:#0f172a;opacity:0.3;
-  font-weight:600;z-index:1;pointer-events:none;
-}
-
 .grid-desktop{display:grid;grid-template-columns:1fr;gap:14px}
 @media(min-width:768px){.grid-desktop{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1200px){.grid-desktop{grid-template-columns:repeat(3,1fr)}}
 
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:15px}
 @media(min-width:768px){.stats{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:1200px){.stats{grid-template-columns:repeat(4,1fr)}}
 .stat{background:linear-gradient(135deg,#ccfbf1 0%,#99f6e4 100%);padding:12px;border-radius:10px;text-align:center}
 .stat-laba{background:linear-gradient(135deg,#dcfce7 0%,#bbf7d0 100%)}
 .stat-danger{background:linear-gradient(135deg,#fee2e2 0%,#fecaca 100%)}
@@ -169,8 +152,26 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary)
 .jaminan-box{background:#eef2ff;border:2px solid #c7d2fe;padding:12px;border-radius:10px;margin-top:10px;display:none}
 .jaminan-box.show{display:block}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.theme-btn{width:60px;height:60px;border-radius:12px;border:3px solid white;cursor:pointer;transition:transform 0.2s}
-.theme-btn:hover{transform:scale(1.1)}
+.theme-btn{width:60px;height:60px;border-radius:12px;border:3px solid white;cursor:pointer}
+
+@media print{
+  body *{visibility:hidden}
+.print-area,.print-area *{visibility:visible}
+.print-area{position:absolute;left:0;top:0;width:100%}
+.modal-header,.modal-close,.btn{display:none!important}
+}
+.kwitansi{width:100%;border:3px double #000;padding:20px;font-family:'Times New Roman',serif}
+.kwitansi h2{text-align:center;margin-bottom:4px;font-size:18px}
+.kwitansi.kop{text-align:center;font-size:12px;border-bottom:2px solid #000;padding-bottom:8px;margin-bottom:15px}
+.kwitansi.isi{font-size:14px;line-height:1.8}
+.kwitansi.ttd{margin-top:40px;display:flex;justify-content:space-between;text-align:center}
+.surat-teguran{width:100%;padding:20px;font-family:'Times New Roman',serif;font-size:12px;line-height:1.6}
+.surat-teguran.kop-surat{text-align:center;border-bottom:3px solid #000;padding-bottom:10px;margin-bottom:20px}
+.surat-teguran.kop-surat h3{margin:0;font-size:16px}
+.surat-teguran.kop-surat p{margin:2px 0;font-size:11px}
+.surat-teguran.nomor{text-align:center;margin:15px 0;text-decoration:underline;font-weight:bold}
+.surat-teguran.isi-surat{text-align:justify}
+.surat-teguran.ttd-surat{margin-top:50px;text-align:right;margin-right:50px}
 </style>
 </head>
 <body>
@@ -198,10 +199,10 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary)
   <p class="menu-title">Laporan & Export</p>
   <a class="menu-item" onclick="exportExcel()">📊 Download Laporan Excel</a>
   <a class="menu-item" onclick="salinData()">📋 Copy Excel ke Clipboard</a>
-  <a class="menu-item sub" onclick="showPage('neraca')">🗂️ Neraca</a>
-  <a class="menu-item sub" onclick="showPage('labaRugi')">💵 Laba Rugi</a>
-  <a class="menu-item sub" onclick="showPage('laporanPL')">📈 Laporan Kolektor</a>
-  <a class="menu-item sub" onclick="showPage('jatuhTempo')">📅 Jatuh Tempo Hari Ini</a>
+  <a class="menu-item" onclick="showPage('neraca')">🗂️ Neraca</a>
+  <a class="menu-item" onclick="showPage('labaRugi')">💵 Laba Rugi</a>
+  <a class="menu-item" onclick="showPage('laporanPL')">📈 Laporan Kolektor</a>
+  <a class="menu-item" onclick="showPage('jatuhTempo')">📅 Jatuh Tempo Hari Ini</a>
   <p class="menu-title">Alat Bantu</p>
   <a class="menu-item" onclick="backupData()">🗂️ Backup Data</a>
   <a class="menu-item" onclick="showPage('pengaturan')">⚙️ Setting & Tema</a>
@@ -242,14 +243,18 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary)
   <div id="tagih" class="page hidden"><div class="card"><h3>🔔 Nasabah Telat Bayar</h3><input type="text" class="search" id="searchTelat" placeholder="🔍 Filter by nama PL..." oninput="renderTelat()"><div id="listTelat"></div></div></div>
   <div id="modal" class="page hidden"><div class="card"><h3>💰 Riwayat Setoran Modal</h3><button class="btn btn-blue" onclick="showModalInput()">➕ Tambah Setoran Modal</button><div class="table-wrap" style="margin-top:12px"><table id="tabelModal"><thead><tr><th>Tanggal</th><th>Nama Pemodal</th><th>Kategori</th><th>Jumlah</th><th>Aksi</th></tr></thead><tbody></tbody></table></div></div></div>
   <div id="kas" class="page hidden"><div class="card"><h3>📒 Buku Kas Harian</h3><p style="font-size:12px;color:#64748b;margin-bottom:12px">Catat uang masuk/keluar selain angsuran: gaji, bensin, listrik, pendapatan lain, dll</p><button class="btn btn-blue" onclick="showKasInput()">➕ Input Transaksi Kas</button><div class="table-wrap" style="margin-top:12px"><table id="tabelKas"><thead><tr><th>Tanggal</th><th>Kategori</th><th>Keterangan</th><th>Masuk</th><th>Keluar</th><th>Aksi</th></tr></thead><tbody></tbody></table></div></div></div>
-  <div id="tambah" class="page hidden"><div class="card"><h3 id="formJudul">➕ Data Nasabah Baru</h3><div class="grid-2"><div><label>No. Rekening *</label><input type="text" id="norek" placeholder="001.001"></div><div><label>Nama PL *</label><select id="namaPL"><option value="">-- Pilih PL --</option><option value="Lalu Imron Gozali">Lalu Imron Gozali</option><option value="Hifzan Hadi">Hifzan Hadi</option><option value="Lalu Danu Rusamsi">Lalu Danu Rusamsi</option><option value="Alfan Taruna Anugraha">Alfan Taruna Anugraha</option></select></div></div><label>Nama Lengkap *</label><input type="text" id="nama" placeholder="Ahmad Supardi"><div class="grid-2"><div><label>No. KTP *</label><input type="text" id="ktp" placeholder="5271xxxxxxxxx"></div><div><label>No. HP *</label><input type="tel" id="hp" placeholder="081234567890"></div></div><label>Alamat Lengkap *</label><input type="text" id="alamat" placeholder="Dusun Montong Gading, RT/RW"><label>Nama Pasangan</label><input type="text" id="namaPasangan" placeholder="Siti Aminah"><label>No. HP Pasangan</label><input type="tel" id="hpPasangan" placeholder="081234567891"><hr style="margin:15px 0;border:none;border-top:2px dashed #e2e8f0"><label>Plapon Pinjaman (Rp) *</label><div class="input-group"><input type="number" id="plapon" value="500000" placeholder="Ketik manual" onchange="hitungTotal()"><button type="button" class="btn-blue btn-small" onclick="showPlaponList()">Pilih</button></div><select id="plaponList" style="display:none;margin-top:8px" onchange="setPlapon()"><option value="">-- Pilih Plapon Cepat --</option><option value="100000">Rp 100.000</option><option value="200000">Rp 200.000</option><option value="300000">Rp 300.000</option><option value="400000">Rp 400.000</option><option value="500000">Rp 500.000</option><option value="600000">Rp 600.000</option><option value="700000">Rp 700.000</option><option value="800000">Rp 800.000</option><option value="900000">Rp 900.000</option><option value="1000000">Rp 1.000.000</option><option value="1500000">Rp 1.500.000</option><option value="2000000">Rp 2.000.000</option></select><label>Tenor (Minggu) *</label><input type="number" id="tenor" value="12" placeholder="Ketik 1-52 minggu" min="1" max="52" onchange="hitungTotal()"><label>Tanggal Cair *</label><input type="date" id="tglCair"><div class="form-row"><div><label>Pinjaman Ke- *</label><input type="number" id="pinjamanKe" value="1" min="1"></div><div><label>Status *</label><select id="statusPinjaman"><option value="Normal">Normal</option><option value="Konpensasi">Konpensasi</option><option value="Restruktur">Restruktur</option></select></div></div><label>Jenis Anggunan *</label><select id="jenisAnggunan" onchange="toggleJaminan()"><option value="">-- Pilih Anggunan --</option><option value="BPKB">BPKB Motor/Mobil</option><option value="SHM">SHM Tanah/Rumah</option></select><div class="jaminan-box" id="boxBPKB"><label>No. BPKB *</label><input type="text" id="noBPKB" placeholder="G12345678"><div class="grid-2"><div><label>Atas Nama *</label><input type="text" id="namaBPKB" placeholder="Ahmad Supardi"></div><div><label>No. Polisi *</label><input type="text" id="nopol" placeholder="DR 1234 AB"></div></div><div class="grid-2"><div><label>Merk/Tipe</label><input type="text" id="merkMotor" placeholder="Honda Beat"></div><div><label>Tahun</label><input type="number" id="tahunMotor" placeholder="2020"></div></div></div><div class="jaminan-box" id="boxSHM"><label>No. SHM *</label><input type="text" id="noSHM" placeholder="12345"><div class="grid-2"><div><label>Atas Nama *</label><input type="text" id="namaSHM" placeholder="Ahmad Supardi"></div><div><label>Luas Tanah (m2) *</label><input type="number" id="luasTanah" placeholder="100"></div></div><label>Alamat Tanah *</label><input type="text" id="alamatTanah" placeholder="Dusun Montong Gading, RT 01/RW 02"></div><div class="info-hitung"><div class="detail-row"><span>Plapon:</span><span id="showPlapon">Rp 500.000</span></div><div class="detail-row"><span>Jasa (1.5%/minggu):</span><span id="showJasa">Rp 90.000</span></div><div class="detail-row"><span><b>Total Pelunasan:</b></span><span id="showTotal"><b>Rp 590.000</b></span></div><div class="detail-row"><span>Angsuran/Minggu:</span><span id="showAngsuran"><b>Rp 49.167</b></span></div></div><button class="btn" id="btnSimpan" onclick="simpanNasabah()">💾 Simpan Data Nasabah</button><button class="btn btn-red" id="btnBatal" onclick="batalEdit()" style="display:none;margin-top:8px">❌ Batal Edit</button></div></div>
-  <div id="pengaturan" class="page hidden"><div class="card"><h3>⚙️ Tema & Setting</h3><p style="margin-bottom:16px;">Pilih warna tema K4S Pro Max:</p><div style="display:flex;gap:16px;flex-wrap:wrap"><button class="theme-btn" style="background:#14b8a6" onclick="gantiTema('#14b8a6','#f59e0b')">Tosca</button><button class="theme-btn" style="background:#1e40af" onclick="gantiTema('#1e40af','#f59e0b')">Biru</button><button class="theme-btn" style="background:#dc2626" onclick="gantiTema('#dc2626','#ffffff')">Merah</button><button class="theme-btn" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)" onclick="gantiTema('#8b5cf6','#ec4899')">Ungu Pink</button><button class="theme-btn" style="background:linear-gradient(135deg,#059669,#10b981)" onclick="gantiTema('#059669','#10b981')">Hijau Fresh</button><button class="theme-btn" style="background:linear-gradient(135deg,#ea580c,#f59e0b)" onclick="gantiTema('#ea580c','#f59e0b')">Orange Gold</button></div><p style="margin-top:16px;font-size:12px;color:#666;">Warna Primary saat ini: <span id="warnaSekarang">#14b8a6</span></p><p style="margin-top:8px;font-size:12px;color:#666;">Mode: File Lokal Anti Eror</p></div></div>
+  <div id="tambah" class="page hidden"><div class="card"><h3 id="formJudul">➕ Data Nasabah Baru</h3><div class="grid-2"><div><label>No. Rekening *</label><input type="text" id="norek" placeholder="001.001"></div><div><label>Nama PL *</label><select id="namaPL"><option value="">-- Pilih PL --</option><option value="Lalu Imron Gozali">Lalu Imron Gozali</option><option value="Hifzan Hadi">Hifzan Hadi</option><option value="Lalu Danu Rusamsi">Lalu Danu Rusamsi</option><option value="Alfan Taruna Anugraha">Alfan Taruna Anugraha</option></select></div></div><label>Nama Lengkap *</label><input type="text" id="nama" placeholder="Ahmad Supardi"><div class="grid-2"><div><label>No. KTP *</label><input type="text" id="ktp" placeholder="5271xxxxxxxxx"></div><div><label>No. HP *</label><input type="tel" id="hp" placeholder="081234567890"></div></div><label>Alamat Lengkap *</label><input type="text" id="alamat" placeholder="Dusun Montong Gading, RT/RW"><label>Nama Pasangan</label><input type="text" id="namaPasangan" placeholder="Siti Aminah"><label>No. HP Pasangan</label><input type="tel" id="hpPasangan" placeholder="081234567891"><hr style="margin:15px 0;border:none;border-top:2px dashed #e2e8f0"><label>Setoran Pokok (Rp) *</label><input type="number" id="setoranPokok" value="50000" placeholder="50000"><label>Plapon Pinjaman (Rp) *</label><div class="input-group"><input type="number" id="plapon" value="500000" placeholder="Ketik manual" onchange="hitungTotal()"><button type="button" class="btn-blue btn-small" onclick="showPlaponList()">Pilih</button></div><select id="plaponList" style="display:none;margin-top:8px" onchange="setPlapon()"><option value="">-- Pilih Plapon Cepat --</option><option value="100000">Rp 100.000</option><option value="200000">Rp 200.000</option><option value="300000">Rp 300.000</option><option value="400000">Rp 400.000</option><option value="500000">Rp 500.000</option><option value="600000">Rp 600.000</option><option value="700000">Rp 700.000</option><option value="800000">Rp 800.000</option><option value="900000">Rp 900.000</option><option value="1000000">Rp 1.000.000</option><option value="1500000">Rp 1.500.000</option><option value="2000000">Rp 2.000.000</option></select><label>Tenor (Minggu) *</label><input type="number" id="tenor" value="12" placeholder="Ketik 1-52 minggu" min="1" max="52" onchange="hitungTotal()"><label>Tanggal Cair *</label><input type="date" id="tglCair"><div class="form-row"><div><label>Pinjaman Ke- *</label><input type="number" id="pinjamanKe" value="1" min="1"></div><div><label>Status *</label><select id="statusPinjaman"><option value="Normal">Normal</option><option value="Konpensasi">Konpensasi</option><option value="Restruktur">Restruktur</option></select></div></div><label>Jenis Anggunan *</label><select id="jenisAnggunan" onchange="toggleJaminan()"><option value="">-- Pilih Anggunan --</option><option value="BPKB">BPKB Motor/Mobil</option><option value="SHM">SHM Tanah/Rumah</option></select><div class="jaminan-box" id="boxBPKB"><label>No. BPKB *</label><input type="text" id="noBPKB" placeholder="G12345678"><div class="grid-2"><div><label>Atas Nama *</label><input type="text" id="namaBPKB" placeholder="Ahmad Supardi"></div><div><label>No. Polisi *</label><input type="text" id="nopol" placeholder="DR 1234 AB"></div></div><div class="grid-2"><div><label>Merk/Tipe</label><input type="text" id="merkMotor" placeholder="Honda Beat"></div><div><label>Tahun</label><input type="number" id="tahunMotor" placeholder="2020"></div></div></div><div class="jaminan-box" id="boxSHM"><label>No. SHM *</label><input type="text" id="noSHM" placeholder="12345"><div class="grid-2"><div><label>Atas Nama *</label><input type="text" id="namaSHM" placeholder="Ahmad Supardi"></div><div><label>Luas Tanah (m2) *</label><input type="number" id="luasTanah" placeholder="100"></div></div><label>Alamat Tanah *</label><input type="text" id="alamatTanah" placeholder="Dusun Montong Gading, RT 01/RW 02"></div><div class="info-hitung"><div class="detail-row"><span>Plapon:</span><span id="showPlapon">Rp 500.000</span></div><div class="detail-row"><span>Jasa (1.5%/minggu):</span><span id="showJasa">Rp 90.000</span></div><div class="detail-row"><span><b>Total Pelunasan:</b></span><span id="showTotal"><b>Rp 590.000</b></span></div><div class="detail-row"><span>Angsuran/Minggu:</span><span id="showAngsuran"><b>Rp 49.167</b></span></div></div><button class="btn" id="btnSimpan" onclick="simpanNasabah()">💾 Simpan Data Nasabah</button><button class="btn btn-red" id="btnBatal" onclick="batalEdit()" style="display:none;margin-top:8px">❌ Batal Edit</button></div></div>
+  <div id="pengaturan" class="page hidden"><div class="card"><h3>⚙️ Tema & Setting</h3><p style="margin-bottom:16px;">Pilih warna tema K4S Pro Max:</p><div style="display:flex;gap:16px;"><button class="theme-btn" style="background:#14b8a6" onclick="gantiTema('#14b8a6','#f59e0b')">Tosca</button><button class="theme-btn" style="background:#1e40af" onclick="gantiTema('#1e40af','#f59e0b')">Biru</button><button class="theme-btn" style="background:#dc2626" onclick="gantiTema('#dc2626','#ffffff')">Merah</button></div><p style="margin-top:16px;font-size:12px;color:#666;">Warna Primary saat ini: <span id="warnaSekarang">#14b8a6</span></p><p style="margin-top:8px;font-size:12px;color:#666;">Mode: File Lokal Anti Eror</p></div></div>
 </div>
 
 <div class="modal" id="modalSetor"><div class="modal-content"><div class="modal-header"><h3>Setor Angsuran</h3><button class="modal-close" onclick="closeModal('modalSetor')">X</button></div><div id="modalInfo"></div><label>Jumlah Setor (Rp) *</label><input type="number" id="jumlahSetor" placeholder="49167"><label>Tanggal Setor *</label><input type="date" id="tglSetor"><label>PL Yang Nagih *</label><select id="plNagih"><option value="">-- Pilih PL --</option><option value="Lalu Imron Gozali">Lalu Imron Gozali</option><option value="Hifzan Hadi">Hifzan Hadi</option><option value="Lalu Danu Rusamsi">Lalu Danu Rusamsi</option><option value="Alfan Taruna Anugraha">Alfan Taruna Anugraha</option></select><button class="btn" onclick="prosesSetor()">✅ Proses Setor</button></div></div>
 <div class="modal" id="modalInputModal"><div class="modal-content"><div class="modal-header"><h3>Input Setoran Modal</h3><button class="modal-close" onclick="closeModal('modalInputModal')">X</button></div><label>Tanggal *</label><input type="date" id="modalTgl"><label>Nama Pemodal *</label><input type="text" id="modalNama" placeholder="H. Abdullah / Kas Koperasi"><label>Kategori *</label><select id="modalKat"><option value="Setoran Modal">Setoran Modal</option><option value="Tarik Modal">Tarik Modal</option><option value="Laba Ditahan">Laba Ditahan</option></select><label>Jumlah (Rp) *</label><input type="number" id="modalJumlah" placeholder="10000000"><label>Keterangan</label><textarea id="modalKet" rows="2" placeholder="Modal awal / Tambahan modal ke-2"></textarea><button class="btn" onclick="simpanModal()">💾 Simpan</button></div></div>
 <div class="modal" id="modalInputKas"><div class="modal-content"><div class="modal-header"><h3>Input Buku Kas</h3><button class="modal-close" onclick="closeModal('modalInputKas')">X</button></div><label>Tanggal *</label><input type="date" id="kasTgl"><label>Kategori *</label><select id="kasKat"><option value="">-- Pilih Kategori --</option><option value="Gaji PL">Gaji PL</option><option value="Bensin">Bensin</option><option value="ATK">ATK</option><option value="Listrik">Listrik</option><option value="Sewa">Sewa Tempat</option><option value="Pendapatan Lain">Pendapatan Lain</option><option value="Biaya Lain">Biaya Lain</option></select><label>Keterangan *</label><input type="text" id="kasKet" placeholder="Gaji Imron bulan April / Beli pulpen"><label>Jumlah (Rp) *</label><input type="number" id="kasJumlah" placeholder="500000"><label>Jenis *</label><select id="kasJenis"><option value="keluar">Uang Keluar</option><option value="masuk">Uang Masuk</option></select><button class="btn" onclick="simpanKas()">💾 Simpan</button></div></div>
 <div class="modal" id="modalColek"><div class="modal-content"><div class="modal-header"><h3>Update Colek Nasabah</h3><button class="modal-close" onclick="closeModal('modalColek')">X</button></div><div id="colekInfo"></div><label>Colek Ke-</label><select id="colekKe"><option value="1">Colek 1 - Telepon</option><option value="2">Colek 2 - Datang ke Rumah</option><option value="3">Colek 3 - Surat Peringatan</option></select><label>Tanggal Colek *</label><input type="date" id="tglColek"><label>Catatan PL</label><textarea id="catatanColek" rows="3" placeholder="Janji bayar tanggal 20, alasan telat karena..."></textarea><button class="btn" onclick="simpanColek()">✅ Simpan Colek</button></div></div>
+
+<div class="modal" id="modalKwitansi"><div class="modal-content"><div class="modal-header"><h3>Kwitansi Setoran</h3><button class="modal-close" onclick="closeModal('modalKwitansi')">X</button></div><div class="print-area"><div id="isiKwitansi" class="kwitansi"></div></div><button class="btn btn-blue" onclick="window.print()">🖨️ Cetak Kwitansi</button></div></div>
+
+<div class="modal" id="modalTeguran"><div class="modal-content"><div class="modal-header"><h3>Surat Teguran</h3><button class="modal-close" onclick="closeModal('modalTeguran')">X</button></div><div class="print-area"><div id="isiTeguran" class="surat-teguran"></div></div><button class="btn btn-blue" onclick="window.print()">🖨️ Cetak Surat</button></div></div>
 
 <script>
 let data = JSON.parse(localStorage.getItem('koperasi_nasabah_v2')) || [];
@@ -268,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function(){
   document.getElementById('tglColek').value = new Date().toISOString().split('T')[0];
   document.documentElement.style.setProperty('--primary', warnaPrimary);
   document.documentElement.style.setProperty('--secondary', warnaSecondary);
-    document.getElementById('warnaSekarang').textContent = warnaPrimary;
+  document.getElementById('warnaSekarang').textContent = warnaPrimary;
   hitungTotal();
   renderAll();
 });
@@ -411,6 +416,7 @@ function resetForm(){
   document.getElementById('alamat').value='';
   document.getElementById('namaPasangan').value='';
   document.getElementById('hpPasangan').value='';
+  document.getElementById('setoranPokok').value='50000';
   document.getElementById('plapon').value='500000';
   document.getElementById('tenor').value='12';
   document.getElementById('pinjamanKe').value='1';
@@ -434,6 +440,7 @@ function editNasabah(id){
   document.getElementById('namaPasangan').value = n.namaPasangan || '';
   document.getElementById('hpPasangan').value = n.hpPasangan || '';
   document.getElementById('namaPL').value = n.pl;
+  document.getElementById('setoranPokok').value = n.setoranPokok || 50000;
   document.getElementById('plapon').value = n.plapon;
   document.getElementById('tenor').value = n.tenor;
   document.getElementById('tglCair').value = n.tglCair;
@@ -628,13 +635,14 @@ function renderDashboard(){
 
   const totalModalMasuk = modalData.filter(m=>m.kategori!=='Tarik Modal').reduce((a,m)=>a+m.jumlah,0);
   const totalModalKeluar = modalData.filter(m=>m.kategori==='Tarik Modal').reduce((a,m)=>a+m.jumlah,0);
-  const modalBersih = totalModalMasuk - totalModalKeluar;
-  const totalPinjamanJalan = data.filter(n=>!n.lunas).reduce((a,n)=>a+n.plapon,0);
-  const totalBiaya = kasData.filter(k=>k.jenis==='keluar').reduce((a,k)=>a+k.jumlah,0);
-  const kasTangan = modalBersih - totalPinjamanJalan - totalBiaya;
-  document.getElementById('sisaModal').textContent = 'Rp ' + kasTangan.toLocaleString('id-ID');
-  document.getElementById('totalCair').textContent = 'Rp ' + totalPinjamanJalan.toLocaleString('id-ID');
-
+  const totalSetoranPokok = data.reduce((a,n)=>a+(n.setoranPokok||0),0);
+const totalPokokKembali = transaksi.reduce((a,t)=>a+t.pokok,0);
+const modalBersih = totalModalMasuk - totalModalKeluar + totalSetoranPokok + totalPokokKembali;
+const totalPinjamanJalan = data.filter(n=>!n.lunas).reduce((a,n)=>a+n.plapon,0);
+const totalBiaya = kasData.filter(k=>k.jenis==='keluar').reduce((a,k)=>a+k.jumlah,0);
+const kasTangan = modalBersih - totalPinjamanJalan - totalBiaya;
+document.getElementById('sisaModal').textContent = 'Rp ' + kasTangan.toLocaleString('id-ID');
+document.getElementById('totalCair').textContent = 'Rp ' + totalPinjamanJalan.toLocaleString('id-ID');
   const telat90 = data.filter(n=>n.mingguTelat>=13&&!n.lunas).length;
   const totalNasabah = data.length;
   const npl = totalNasabah>0? ((telat90/totalNasabah)*100).toFixed(1) : 0;
@@ -666,7 +674,8 @@ function renderDashboard(){
 function renderNeraca(){
   const totalModalMasuk = modalData.filter(m=>m.kategori!=='Tarik Modal').reduce((a,m)=>a+m.jumlah,0);
   const totalModalKeluar = modalData.filter(m=>m.kategori==='Tarik Modal').reduce((a,m)=>a+m.jumlah,0);
-  const modalBersih = totalModalMasuk - totalModalKeluar;
+  const totalSetoranPokok = data.reduce((a,n)=>a+(n.setoranPokok||0),0);
+  const modalBersih = totalModalMasuk - totalModalKeluar + totalSetoranPokok;
   const piutang = data.filter(n=>!n.lunas).reduce((a,n)=>a+n.sisa,0);
   const totalBiaya = kasData.filter(k=>k.jenis==='keluar').reduce((a,k)=>a+k.jumlah,0);
   const kasTangan = modalBersih - data.filter(n=>!n.lunas).reduce((a,n)=>a+n.plapon,0) - totalBiaya;
@@ -780,29 +789,35 @@ function renderNasabah(){
   }
 
   let html = '';
-  filtered.forEach(n=>{
-    const statusBadge = n.lunas? '<span class="badge badge-lunas">LUNAS</span>' :
-                       n.mingguTelat>0? `<span class="badge badge-telat">TELAT ${n.mingguTelat}M</span>` :
-                       '<span class="badge badge-aktif">AKTIF</span>';
+    filtered.forEach(n=>{
+  // HITUNG SETORAN DARI TRANSAKSI
+  const semuaTransaksi = JSON.parse(localStorage.getItem('koperasi_transaksi') || '[]');
+  const setoranNasabah = semuaTransaksi.filter(t => t.idNasabah === n.id);
+  const totalSetor = setoranNasabah.reduce((sum, t) => sum + t.jumlah, 0);
+  const kaliSetor = setoranNasabah.length;
+  const sisaTagihan = n.total - totalSetor;
+  const statusBadge = n.lunas? '<span class="badge badge-lunas">LUNAS</span>' : 
+    n.mingguTelat>0? `<span class="badge badge-telat">TELAT ${n.mingguTelat} MINGGU</span>` :
+    '<span class="badge badge-aktif">AKTIF</span>';
     const colekBadge = n.colekKe>0? `<span class="badge badge-colek">COLEK ${n.colekKe}</span>` : '';
+    const btnTeguran = n.mingguTelat>=3? `<button class="btn btn-red btn-small" onclick="cetakTeguran(${n.id})">Teguran</button>` : '';
+    const btnWA = `<a href="https://wa.me/62${n.hp.replace(/^0/,'')}" target="_blank" class="btn btn-blue btn-small">WA</a>`;
 
     html += `
       <div class="nasabah-item ${n.mingguTelat>0?'telat':''}">
         <div class="nasabah-head">
           <div class="nasabah-nama">${n.nama} ${statusBadge} ${colekBadge}</div>
-        </div>
-        <div class="nasabah-info">
-          No.Rek: ${n.norek} | KTP: ${n.ktp} | HP: ${n.hp}<br>
-          PL: ${n.pl} | Pinjaman Ke-${n.pinjamanKe} | Status: ${n.statusPinjaman}<br>
-          Alamat: ${n.alamat}
-        </div>
+          <div class="nasabah-info">
+            No.Rek: ${n.norek} | KTP: ${n.ktp} | HP: ${n.hp}<br>
+            PL: ${n.pl} | Pinjaman Ke-${n.pinjamanKe} | Status: ${n.statusPinjaman}<br>
+            Alamat: ${n.alamat}
+          </div>
         <div class="detail-box">
           <div class="detail-row"><span>Plapon:</span><span>Rp ${n.plapon.toLocaleString('id-ID')}</span></div>
           <div class="detail-row"><span>Tenor:</span><span>${n.tenor} minggu</span></div>
           <div class="detail-row"><span>Angsuran/Minggu:</span><span>Rp ${n.angsuran.toLocaleString('id-ID')}</span></div>
           <div class="detail-row"><span>Total Pelunasan:</span><span>Rp ${n.total.toLocaleString('id-ID')}</span></div>
-          <div class="detail-row"><span>Sudah Setor:</span><span class="masuk">Rp ${n.setor.toLocaleString('id-ID')} (${n.mingguKe}/${n.tenor})</span></div>
-          <div class="detail-row"><span>Sisa:</span><span class="keluar"><b>Rp ${n.sisa.toLocaleString('id-ID')}</b></span></div>
+          <div class="detail-row"><span>Sudah Setor:</span><span style="color:green">Rp ${totalSetor.toLocaleString('id-ID')} (${kaliSetor}/${n.tenor})</span></div>
           <div class="detail-row"><span>Tgl Cair:</span><span>${n.tglCair}</span></div>
           <div class="detail-row"><span>Jatuh Tempo:</span><span>${n.tglJatuh}</span></div>
           ${n.jenisAnggunan? `<div class="detail-row"><span>Anggunan:</span><span>${n.jenisAnggunan} - ${n.jenisAnggunan==='BPKB'? n.nopol : n.noSHM}</span></div>` : ''}
@@ -810,7 +825,10 @@ function renderNasabah(){
         </div>
         <div class="action-row">
           ${!n.lunas? `<button class="btn btn-small" onclick="openSetor(${n.id})">Setor</button>` : ''}
-          ${n.mingguTelat>0&&!n.lunas? `<button class="btn btn-purple btn-small" onclick="openColek(${n.id})">Colek</button>` : ''}
+          <button class="btn btn-yellow btn-small" onclick="cetakKwitansi(${n.id})">Kwitansi</button>
+          <button class="btn btn-purple btn-small" onclick="openColek(${n.id})">Colek</button>
+          ${btnTeguran}
+          ${btnWA}
           <button class="btn btn-orange btn-small" onclick="editNasabah(${n.id})">Edit</button>
           <button class="btn btn-red btn-small" onclick="hapusNasabah(${n.id})">Hapus</button>
         </div>
@@ -832,16 +850,19 @@ function renderTelat(){
   let html = '';
   telat.forEach(n=>{
     const colekBadge = n.colekKe>0? `<span class="badge badge-colek">COLEK ${n.colekKe}</span>` : '';
+    const btnTeguran = n.mingguTelat>=3? `<button class="btn btn-red btn-small" onclick="cetakTeguran(${n.id})">Surat Teguran</button>` : '';
     html += `
       <div class="nasabah-item telat">
         <div class="nasabah-nama">${n.nama} <span class="badge badge-telat">TELAT ${n.mingguTelat} MINGGU</span> ${colekBadge}</div>
         <div class="nasabah-info">
-          No.Rek: ${n.norek} | PL: ${n.pl} | HP          Sisa: Rp ${n.sisa.toLocaleString('id-ID')} | Angsuran: Rp ${n.angsuran.toLocaleString('id-ID')}<br>
+          No.Rek: ${n.norek} | PL: ${n.pl} | HP: ${n.hp}<br>
+          Sisa: Rp ${n.sisa.toLocaleString('id-ID')} | Angsuran: Rp ${n.angsuran.toLocaleString('id-ID')}<br>
           ${n.catatanColek? 'Catatan: '+n.catatanColek : ''}
         </div>
         <div class="action-row">
           <button class="btn btn-small" onclick="openSetor(${n.id})">Setor</button>
           <button class="btn btn-purple btn-small" onclick="openColek(${n.id})">Colek</button>
+          ${btnTeguran}
           <a href="https://wa.me/62${n.hp.replace(/^0/,'')}" target="_blank" class="btn btn-blue btn-small">WA</a>
         </div>
       </div>
@@ -912,17 +933,17 @@ function hapusKas(idx){
 }
 
 function exportExcel(){
-  let csv = 'No Rekening,Nama,KTP,HP,Alamat,PL,Plapon,Tenor,Bunga,Total,Angsuran,Sisa,Setor,Minggu Ke,Telat,Minggu Telat,Status,Lunas,Colek Ke,Tgl Colek,Catatan Colek\n';
+  let csv = 'No Rekening,Nama,KTP,HP,Alamat,PL,Setoran Pokok,Plapon,Tenor,Bunga,Total,Angsuran,Sisa,Setor,Minggu Ke,Telat,Minggu Telat,Status,Lunas,Colek Ke,Tgl Colek,Catatan Colek\n';
   data.forEach(n=>{
-    csv += `"${n.norek}","${n.nama}","${n.ktp}","${n.hp}","${n.alamat}","${n.pl}",${n.plapon},${n.tenor},${n.bunga},${n.total},${n.angsuran},${n.sisa},${n.setor},${n.mingguKe},${n.mingguTelat>0?'Ya':'Tidak'},${n.mingguTelat},"${n.statusPinjaman}",${n.lunas?'Lunas':'Aktif'},${n.colekKe},"${n.tglColek}","${n.catatanColek}"\n`;
+    csv += `"${n.norek}","${n.nama}","${n.ktp}","${n.hp}","${n.alamat}","${n.pl}",${n.setoranPokok||0},${n.plapon},${n.tenor},${n.bunga},${n.total},${n.angsuran},${n.sisa},${n.setor},${n.mingguKe},${n.mingguTelat>0?'Ya':'Tidak'},${n.mingguTelat},"${n.statusPinjaman}",${n.lunas?'Lunas':'Aktif'},${n.colekKe},"${n.tglColek}","${n.catatanColek}"\n`;
   });
   downloadFile(csv, 'Laporan_Nasabah_K4S.csv', 'text/csv');
 }
 
 function salinData(){
-  let teks = 'No.Rek\tNama\tPlapon\tSisa\tSetor\tMinggu\tTelat\tStatus\n';
+  let teks = 'No.Rek\tNama\tSetoran Pokok\tPlapon\tSisa\tSetor\tMinggu\tTelat\tStatus\n';
   data.forEach(n=>{
-    teks += `${n.norek}\t${n.nama}\t${n.plapon}\t${n.sisa}\t${n.setor}\t${n.mingguKe}/${n.tenor}\t${n.mingguTelat}\t${n.lunas?'Lunas':'Aktif'}\n`;
+    teks += `${n.norek}\t${n.nama}\t${n.setoranPokok||0}\t${n.plapon}\t${n.sisa}\t${n.setor}\t${n.mingguKe}/${n.tenor}\t${n.mingguTelat}\t${n.lunas?'Lunas':'Aktif'}\n`;
   });
   navigator.clipboard.writeText(teks).then(()=>alert('✅ Data berhasil disalin! Tinggal paste di Excel'));
 }
@@ -947,11 +968,98 @@ function downloadFile(content, filename, type){
   a.click();
   URL.revokeObjectURL(url);
 }
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js');
-  });
+
+function cetakKwitansi(id){
+  const n = data.find(x=>x.id===id);
+  if(!n) return;
+  const tgl = new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'});
+  document.getElementById('isiKwitansi').innerHTML = `
+    <div class="kop">
+      <h2>KWITANSI SETORAN POKOK</h2>
+      <p>KOPERASI SYARIAH EMPAT SEKAWAN<br>Jln. Pariwisata Otak Kokok, Desa Pesanggrahan</p>
+    </div>
+    <div class="isi">
+      <table style="width:100%;border:none">
+        <tr><td width="35%">No. Anggota</td><td>: ${n.norek}</td></tr>
+        <tr><td>Nama Anggota</td><td>: <b>${n.nama}</b></td></tr>
+        <tr><td>Alamat</td><td>: ${n.alamat}</td></tr>
+        <tr><td>Tanggal Setor</td><td>: ${tgl}</td></tr>
+        <tr><td>Jumlah Setoran</td><td>: <b>Rp ${(n.setoranPokok||0).toLocaleString('id-ID')}</b></td></tr>
+        <tr><td>Terbilang</td><td>: ${terbilang(n.setoranPokok||0)} Rupiah</td></tr>
+      </table>
+    </div>
+    <div class="ttd">
+      <div>Penyetor,<br><br><br><b>(${n.nama})</b></div>
+      <div>Bendahara,<br><br><br><b>(___________)</b></div>
+    </div>
+  `;
+  document.getElementById('modalKwitansi').classList.add('show');
 }
+
+function cetakTeguran(id){
+  const n = data.find(x=>x.id===id);
+  if(!n) return;
+  const tgl = new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'});
+  const tunggakan = n.mingguTelat * n.angsuran;
+  document.getElementById('isiTeguran').innerHTML = `
+    <div class="kop-surat">
+      <h3>KOPERASI SYARIAH EMPAT SEKAWAN</h3>
+      <p>Badan Hukum: ________________</p>
+      <p>Jln. Pariwisata Otak Kokok, Desa Pesanggrahan, Kec. Montong Gading</p>
+      <p>Telp/WA: 0819-XXXX-XXXX | Email: k4s@koperasi.id</p>
+    </div>
+    <div class="nomor">SURAT TEGURAN KE-${n.colekKe||3}</div>
+    <div class="isi-surat">
+      <p>Kepada Yth,<br>
+      <b>Bapak/Ibu ${n.nama}</b><br>
+      di Tempat</p>
+
+      <p>Dengan hormat,</p>
+
+      <p>Sehubungan dengan kewajiban angsuran pinjaman Saudara di Koperasi Syariah Empat Sekawan dengan data sebagai berikut:</p>
+
+      <table style="margin:10px 0">
+        <tr><td width="150px">No. Rekening</td><td>: ${n.norek}</td></tr>
+        <tr><td>Nama</td><td>: ${n.nama}</td></tr>
+        <tr><td>Alamat</td><td>: ${n.alamat}</td></tr>
+        <tr><td>Plapon Pinjaman</td><td>: Rp ${n.plapon.toLocaleString('id-ID')}</td></tr>
+        <tr><td>Angsuran/Minggu</td><td>: Rp ${n.angsuran.toLocaleString('id-ID')}</td></tr>
+        <tr><td>Tunggakan</td><td>: <b>${n.mingguTelat} Minggu = Rp ${tunggakan.toLocaleString('id-ID')}</b></td></tr>
+      </table>
+
+      <p>Berdasarkan data kami, Saudara telah menunggak pembayaran angsuran selama <b>${n.mingguTelat} ( ${terbilang(n.mingguTelat)} ) minggu</b> dengan total tunggakan sebesar <b>Rp ${tunggakan.toLocaleString('id-ID')} (${terbilang(tunggakan)} Rupiah)</b>.</p>
+
+      <p>Dengan ini kami memberikan <b>TEGURAN KERAS</b> kepada Saudara untuk segera menyelesaikan kewajiban tersebut selambat-lambatnya <b>7 (tujuh) hari</b> sejak surat ini diterima.</p>
+
+      <p>Apabila sampai batas waktu yang ditentukan Saudara tidak melakukan pembayaran, maka kami akan mengambil langkah hukum sesuai dengan perjanjian yang telah ditandatangani dan peraturan perkoperasian yang berlaku.</p>
+
+      <p>Demikian surat teguran ini kami sampaikan. Atas perhatian dan kerjasamanya, kami ucapkan terima kasih.</p>
+    </div>
+    <div class="ttd-surat">
+      Montong Gading, ${tgl}<br>
+      Pengurus K4S,<br><br><br>
+      <b>(_____________________)</b><br>
+      Ketua
+    </div>
+  `;
+  document.getElementById('modalTeguran').classList.add('show');
+}
+
+function terbilang(n){
+  if(n==0) return 'Nol';
+  const angka = ['','Satu','Dua','Tiga','Empat','Lima','Enam','Tujuh','Delapan','Sembilan','Sepuluh','Sebelas'];
+  n = Math.floor(Math.abs(n));
+  if(n<12) return angka[n];
+  if(n<20) return terbilang(n-10)+' Belas';
+  if(n<100) return terbilang(Math.floor(n/10))+' Puluh '+terbilang(n%10);
+  if(n<200) return 'Seratus '+terbilang(n-100);
+  if(n<1000) return terbilang(Math.floor(n/100))+' Ratus '+terbilang(n%100);
+  if(n<2000) return 'Seribu '+terbilang(n-1000);
+  if(n<1000000) return terbilang(Math.floor(n/1000))+' Ribu '+terbilang(n%1000);
+  if(n<1000000000) return terbilang(Math.floor(n/1000000))+' Juta '+terbilang(n%1000000);
+  return terbilang(Math.floor(n/1000000000))+' Miliar '+terbilang(n%1000000000);
+}
+
 renderAll();
 </script>
 </body>
