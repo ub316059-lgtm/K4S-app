@@ -1,54 +1,246 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0f172a">
-  <title>K4S v6.1</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
-    body{background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;justify-content:center;padding:20px}
-    .box{width:100%;max-width:400px}
-    h1{text-align:center;margin:16px 0}
-    .card{background:#1e293b;padding:20px;border-radius:16px;border:1px solid #334155}
-    input{width:100%;padding:14px;background:#0f172a;border:1px solid #475569;border-radius:10px;color:#fff;font-size:18px;text-align:center;margin:12px 0}
-    button{width:100%;padding:14px;background:#3b82f6;border:none;border-radius:10px;color:#fff;font-size:16px;font-weight:600;margin:6px 0}
-    .hasil{background:#0f172a;padding:16px;border-radius:10px;margin-top:12px;white-space:pre-wrap;line-height:1.6}
-    .row{display:flex;gap:8px}
-    .row button{flex:1;background:#475569}
-    .footer{text-align:center;margin-top:20px;font-size:12px;color:#64748b}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K4S - Koperasi Syariah Empat Sekawan</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#14b8a6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="K4S">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#14b8a6;--primary-light:#d1fae5;--primary-soft:#ecfdf5;--secondary:#f59e0b;--danger:#dc2626;--sidebar-width:280px}
+html,body{overflow-x:hidden;width:100%}
+
+body{
+  font-family:'Segoe UI',sans-serif;
+  color:#0f172a;
+  background: linear-gradient(270deg, #ffffff, #ff0000, #ffffff);
+  background-size: 600% 600%;
+  animation: gerakMerahPutih 20s ease infinite;
+}
+@keyframes gerakMerahPutih {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.header{
+  background:linear-gradient(135deg,var(--primary-soft) 0%,var(--primary-light) 100%);
+  color:#065f46;padding:12px 15px;text-align:center;position:relative;
+}
+.header-top{
+  display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:4px;
+}
+.menu-fab{
+  background:linear-gradient(135deg,var(--primary) 0%,#0d9488 100%);
+  color:#fff;border:2px solid #fff;
+  width:42px;height:42px;border-radius:12px;font-size:20px;
+  cursor:pointer;box-shadow:0 4px 12px rgba(20,184,166,0.5);
+  flex-shrink:0;
+}
+.header h1{font-size:18px;font-weight:900;margin:0}
+.header p{
+  font-size:12px;opacity:0.9;padding-bottom:6px;margin:0;
+  border-bottom:4px solid var(--secondary);position:relative;
+}
+.header p::after{
+  content:'';position:absolute;bottom:-4px;left:0;height:4px;width:100%;
+  background:linear-gradient(90deg, transparent, #fff, var(--secondary), #fff, transparent);
+  background-size:200% 100%;
+  animation: garisJalan 3s linear infinite;
+}
+@keyframes garisJalan {
+  0%{background-position:200% 0}
+  100%{background-position:-200% 0}
+}
+
+.sidebar{
+  width:var(--sidebar-width);background:#fff;color:#333;padding:20px;
+  transition:transform 0.3s ease;position:fixed;left:0;top:0;bottom:0;
+  overflow-y:auto;z-index:99;transform:translateX(-100%);
+  box-shadow:2px 0 10px rgba(0,0,0,0.1);
+  display:flex;flex-direction:column;
+}
+.sidebar.open{transform:translateX(0)}
+.sidebar.menu-title{
+  margin:16px 0 8px;font-size:12px;color:#666;font-weight:700;
+  text-transform:uppercase;width:100%;
+}
+.sidebar.menu-title::before{content:'✅ ';margin-right:4px}
+.sidebar.menu-item{
+  padding:12px;margin:4px 0;border-radius:8px;cursor:pointer;
+  display:block;width:100%;color:#333;text-decoration:none;font-size:14px;
+  background:#f8fafc;
+}
+.sidebar.menu-item.sub{text-align:center;padding-left:16px;padding-right:16px;font-size:13px}
+.sidebar.menu-item:hover,.sidebar.menu-item.active{background:#ccfbf1;color:var(--primary)}
+.sidebar.close-btn{
+  text-align:right;margin-bottom:16px;font-size:28px;cursor:pointer;
+  display:block;width:100%;background:none;border:none;
+}
+.sidebar.badge-menu{background:var(--danger);color:#fff;border-radius:10px;padding:2px 6px;font-size:10px;margin-left:6px}
+.overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:98}
+.overlay.active{display:block}
+
+.container{max-width:1400px;margin:0 auto;padding:15px 8px}
+.card{
+  background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);
+  border-radius:14px;padding:12px;margin-bottom:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);overflow:hidden;position:relative;
+}
+.card h3{font-size:16px;margin:0 0 12px;color:var(--primary);font-weight:800}
+
+/* WATERMARK SAMAR KOPERASI 4 SEKAWAN */
+.page::after{
+  content:'Koperasi 4 Sekawan';
+  position:fixed;bottom:8px;right:12px;
+  font-size:10px;color:#0f172a;opacity:0.3;
+  font-weight:600;z-index:1;pointer-events:none;
+}
+
+.grid-desktop{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:768px){.grid-desktop{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1200px){.grid-desktop{grid-template-columns:repeat(3,1fr)}}
+
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:15px}
+@media(min-width:768px){.stats{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1200px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{background:linear-gradient(135deg,#ccfbf1 0%,#99f6e4 100%);padding:12px;border-radius:10px;text-align:center}
+.stat-laba{background:linear-gradient(135deg,#dcfce7 0%,#bbf7d0 100%)}
+.stat-danger{background:linear-gradient(135deg,#fee2e2 0%,#fecaca 100%)}
+.stat-value{font-size:16px;font-weight:900;color:var(--primary);margin-bottom:3px}
+.stat-laba.stat-value{color:#15803d}
+.stat-danger.stat-value{color:var(--danger)}
+.stat-label{font-size:10px;color:#475569;font-weight:600}
+.detail-row{display:flex;justify-content:space-between;gap:8px;font-size:12px;margin:6px 0;align-items:flex-start}
+.detail-row span:first-child{color:#64748b;flex:1;min-width:0;word-break:break-word}
+.detail-row span:last-child{font-weight:700;color:#0f172a;text-align:right;white-space:nowrap;flex-shrink:0}
+.masuk{color:#15803d!important}
+.keluar{color:var(--danger)!important}
+
+.page{display:none}.page.active{display:block}
+h2{color:var(--primary);margin-bottom:16px}
+table{width:100%;background:#fff;border-radius:12px;overflow:hidden;border-collapse:collapse;font-size:13px}
+th{background:var(--primary);color:#fff;padding:10px;text-align:left}
+td{padding:10px;border-bottom:1px solid #eee}
+input,select,textarea{width:100%;padding:11px;border:2px solid #cbd5e1;border-radius:10px;font-size:15px;box-sizing:border-box}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary)}
+.btn{background:linear-gradient(135deg,#16a34a 0%,#15803d 100%);color:#fff;border:none;font-weight:800;padding:14px;border-radius:10px;width:100%;font-size:15px;cursor:pointer;margin-top:12px}
+.btn-blue{background:linear-gradient(135deg,var(--primary) 0%,#0d9488 100%)}
+.btn-red{background:linear-gradient(135deg,var(--danger) 0%,#b91c1c 100%)}
+.btn-orange{background:linear-gradient(135deg,#ea580c 0%,#c2410c 100%)}
+.btn-yellow{background:linear-gradient(135deg,#f59e0b 0%,#d97706 100%)}
+.btn-purple{background:linear-gradient(135deg,#7c3aed 0%,#6d28d9 100%)}
+.btn-small{padding:8px 12px;font-size:12px;width:auto;display:inline-block}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.nasabah-item{background:#f8fafc;border:2px solid #e2e8f0;padding:12px;border-radius:10px;margin-bottom:10px;width:100%;box-sizing:border-box}
+.nasabah-item.telat{border-color:#fca5a5;background:#fef2f2}
+.nasabah-head{margin-bottom:8px}
+.nasabah-nama{font-weight:800;font-size:15px;color:var(--primary);margin-bottom:6px}
+.nasabah-info{font-size:12px;color:#64748b;line-height:1.6;word-break:break-word;margin-bottom:8px}
+.badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;margin-left:6px}
+.badge-lunas{background:#dcfce7;color:#15803d}
+.badge-aktif{background:#fef3c7;color:#92400e}
+.badge-telat{background:#fee2e2;color:var(--danger)}
+.badge-colek{background:#ddd6fe;color:#6d28d9}
+.detail-box{background:#fff;border:1px solid #e2e8f0;padding:10px;border-radius:8px;margin-top:10px}
+.action-row{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.action-row-full{display:flex;gap:6px;margin-top:8px}
+.action-row-full button{flex:1}
+.hidden{display:none}
+.empty{text-align:center;padding:30px;color:#94a3b8;font-size:14px}
+.search{margin-bottom:12px}
+.info-hitung{background:#fef3c7;border:2px solid #fde68a;padding:10px;border-radius:8px;font-size:12px;margin-top:8px;color:#92400e;font-weight:600}
+.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:999;display:none;align-items:center;justify-content:center;padding:15px}
+.modal.show{display:flex}
+.modal-content{background:#fff;border-radius:14px;padding:20px;width:100%;max-width:400px;max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.modal-close{background:#f1f5f9;border:none;width:30px;height:30px;border-radius:50%;font-weight:900;cursor:pointer}
+.input-group{display:flex;gap:8px;align-items:end}
+.input-group input{flex:1}
+.input-group button{padding:11px 15px;margin:0;width:auto;font-size:13px}
+.riwayat-item{background:#f8fafc;border:1px solid #e2e8f0;padding:8px;border-radius:6px;margin-bottom:6px;font-size:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.riwayat-item span:first-child{flex:1;min-width:0}
+.riwayat-item div{flex-shrink:0;display:flex;gap:4px}
+.table-wrap{overflow-x:auto}
+.jaminan-box{background:#eef2ff;border:2px solid #c7d2fe;padding:12px;border-radius:10px;margin-top:10px;display:none}
+.jaminan-box.show{display:block}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.theme-btn{width:60px;height:60px;border-radius:12px;border:3px solid white;cursor:pointer;transition:transform 0.2s}
+.theme-btn:hover{transform:scale(1.1)}
+</style>
 </head>
 <body>
-  <div class="box">
-    <h1>K4S v6.1</h1>
-    <div class="card">
-      <p>Masukkan 4 angka keberuntungan:</p>
-      <input type="number" id="angka" placeholder="Contoh: 1234" maxlength="4">
-      <button onclick="prediksi()">Buat Prediksi</button>
-      <div id="hasil" class="hasil" style="display:none"></div>
-      <div id="tombol" class="row" style="display:none">
-        <button onclick="salin()">Salin</button>
-        <button onclick="share()">Bagikan</button>
+
+<div class="header">
+  <div class="header-top">
+    <button class="menu-fab" onclick="toggleSidebar()">☰</button>
+    <h1>KOPERASI SYARIAH EMPAT SEKAWAN</h1>
+  </div>
+  <p>Jln. Pariwisata Otak Kokok, Desa Pesanggrahan</p>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<div class="sidebar" id="sidebar">
+  <button class="close-btn" onclick="toggleSidebar()">×</button>
+  <p class="menu-title">Menu Utama</p>
+  <a class="menu-item active" onclick="showPage('dashboard')">📊 Dashboard</a>
+  <a class="menu-item" onclick="showPage('nasabah')">👥 Daftar Nasabah</a>
+  <a class="menu-item" onclick="showPage('tagih')">🔔 Tagih / Tunggakan <span class="badge-menu" id="notifTelat" style="display:none">0</span></a>
+  <p class="menu-title">Transaksi & Uang</p>
+  <a class="menu-item" onclick="showPage('tambah')">➕ Tambah Nasabah</a>
+  <a class="menu-item" onclick="showPage('modal')">💰 Modal</a>
+  <a class="menu-item" onclick="showPage('kas')">📒 Buku Kas</a>
+  <p class="menu-title">Laporan & Export</p>
+  <a class="menu-item" onclick="exportExcel()">📊 Download Laporan Excel</a>
+  <a class="menu-item" onclick="salinData()">📋 Copy Excel ke Clipboard</a>
+  <a class="menu-item sub" onclick="showPage('neraca')">🗂️ Neraca</a>
+  <a class="menu-item sub" onclick="showPage('labaRugi')">💵 Laba Rugi</a>
+  <a class="menu-item sub" onclick="showPage('laporanPL')">📈 Laporan Kolektor</a>
+  <a class="menu-item sub" onclick="showPage('jatuhTempo')">📅 Jatuh Tempo Hari Ini</a>
+  <p class="menu-title">Alat Bantu</p>
+  <a class="menu-item" onclick="backupData()">🗂️ Backup Data</a>
+  <a class="menu-item" onclick="showPage('pengaturan')">⚙️ Setting & Tema</a>
+</div>
+
+<div class="container">
+  <div id="dashboard" class="page active">
+    <div class="stats">
+      <div class="stat"><div class="stat-value" id="uangMasukHariIni">Rp 0</div><div class="stat-label">Uang Masuk Hari Ini</div></div>
+      <div class="stat stat-laba"><div class="stat-value" id="labaBersihBulan">Rp 0</div><div class="stat-label">Laba Bersih Bulan Ini</div></div>
+      <div class="stat"><div class="stat-value" id="sisaModal">Rp 0</div><div class="stat-label">Sisa Modal Nganggur</div></div>
+      <div class="stat stat-danger"><div class="stat-value" id="nplPersen">0%</div><div class="stat-label">NPL >90 Hari</div></div>
+      <div class="stat"><div class="stat-value" id="totalCair">Rp 0</div><div class="stat-label">Total Pinjaman Jalan</div></div>
+      <div class="stat stat-danger"><div class="stat-value" id="totalTelat">0</div><div class="stat-label">Nasabah Telat</div></div>
+    </div>
+    <div class="grid-desktop">
+      <div class="card">
+        <h3>📊 Ringkasan Laba Rugi Real</h3>
+        <div class="detail-row"><span>Pendapatan Bunga:</span><span id="laporanBunga" class="masuk"><b>Rp 0</b></span></div>
+        <div class="detail-row"><span>Pendapatan Denda:</span><span id="laporanDenda" class="masuk"><b>Rp 0</b></span></div>
+        <div class="detail-row"><span>Pendapatan Lain:</span><span id="laporanLain" class="masuk"><b>Rp 0</b></span></div>
+        <div class="detail-row"><span>Total Biaya Operasional:</span><span id="laporanBiaya" class="keluar"><b>Rp 0</b></span></div>
+        <hr style="margin:10px 0;border:none;border-top:2px solid #e2e8f0">
+        <div class="detail-row"><span><b>LABA BERSIH REAL:</b></span><span id="laporanLaba" class="masuk"><b>Rp 0</b></span></div>
+      </div>
+      <div class="card">
+        <h3>👥 Kinerja Petugas Lapangan</h3>
+        <div id="kinerjaPL"></div>
       </div>
     </div>
-    <div class="footer">Offline Ready ✅</div>
   </div>
-<script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js')}
-let hasilText = '';
-function prediksi(){
-  const a = document.getElementById('angka').value;
-  if(a.length !== 4) return alert('Harus 4 angka bro!');
-  const n = parseInt(a);
-  const shio = ['Tikus','Kerbau','Macan','Kelinci','Naga','Ular','Kuda','Kambing','Monyet','Ayam','Anjing','Babi'];
-  hasilText = `🎯 PREDIKSI K4S v6.1\n\nInput: ${a}\nShio: ${shio[n%12]}\nAngka Main: ${n%10}${(n+3)%10}${(n+7)%10}D\nColok Bebas: ${n%10}/${(n+1)%10}\n\n*Disclaimer: Hiburan saja*`;
-  document.getElementById('hasil').innerText = hasilText;
-  document.getElementById('hasil').style.display = 'block';
-  document.getElementById('tombol').style.display = 'flex';
-}
-function salin(){navigator.clipboard.writeText(hasilText);alert('Udah disalin bro!')}
-function share(){navigator.share?navigator.share({text:hasilText}):salin()}
-</script>
-</body>
-</html>
+
+  <div id="neraca" class="page hidden"><div class="card"><h3>🗂️ Neraca Koperasi</h3><div id="isiNeraca"></div><button class="btn btn-blue" onclick="window.print()">🖨️ Cetak Neraca</button></div></div>
+  <div id="labaRugi" class="page hidden"><div class="card"><h3>💵 Laporan Laba Rugi Detail</h3><div id="isiLabaRugi"></div><button class="btn btn-blue" onclick="window.print()">🖨️ Cetak Laba Rugi</button></div></div>
+  <div id="laporanPL" class="page hidden"><div class="card"><h3>📈 Laporan Kinerja Kolektor</h3><div id="isiLaporanPL"></div></div></div>
+  <div id="jatuhTempo" class="page hidden"><div class="card"><h3>📅 Nasabah Jatuh Tempo Hari Ini</h3><div id="isiJatuhTempo"></div></div></div>
+  <div id="nasabah" class="page hidden"><div class="card"><h2>Daftar Semua Nasabah</h2><input type="text" class="search" id="searchNama" placeholder="🔍 Cari nama/no KTP/no rekening/PL..." oninput="renderNasabah()"><div id="listNasabah"></div></div></div>
+  <div id="tagih" class="page hidden"><div class="card"><h3>🔔 Nasabah Telat Bayar</h3><input type="text" class="search" id="searchTelat" placeholder="🔍 Filter by nama PL..." oninput="renderTelat()"><div id="listTelat"></div></div></div>
+  <div id="modal" class="page hidden"><div class="card"><h3>💰 Riwayat Setoran Modal</h3><button class="btn btn-blue" onclick="showModalInput()">➕ Tambah Setoran Modal</button><div class="table-wrap" style="margin-top:12px"><table id="tabelModal"><thead><tr><th>Tanggal</th><th>Nama Pemodal</th><th>Kategori</th><th>Jumlah</th><th>Aksi</th></tr></thead><tbody></tbody></table></div></div></div>
+  <div id="kas" class="page hidden"><div class="card"><h3>📒 Buku Kas Harian</h3><p style="font-size:12px;color:#64748b;margin-bottom:12px">Catat uang masuk/keluar selain angsuran: gaji, bensin, listrik, pendapatan lain, dll</p><button class="btn btn-blue" onclick="showKasInput()">➕ Input Transaksi Kas</button><div class="table-wrap" style="margin-top:12px"><table id="tabelKas"><thead><tr><th>Tanggal</th><th>Kategori</th><th>Keterangan</th><th>Masuk</th><th>Keluar</th><th>Aksi</th></tr></thead><tbody></tbody></table></div></div></div>
+  <div id="tambah" class="page hidden"><div class="card"><h3 id="formJudul">➕ Data Nasabah Baru</h3><div class="grid-2"><div><label>No. Rekening *</label><input type="text" id="norek" placeholder="001.001"></div><div><label>Nama PL *</label><select id="namaPL"><option value="">-- Pilih PL --</option><option value="Lalu Imron Gozali">Lalu Imron Gozali</option><option value="Hifzan Hadi">Hifzan Hadi</option><option value="Lalu Danu Rusamsi">Lalu Danu Rusamsi</option><option value="Alfan Taruna Anugraha">Alfan Taruna Anugraha</option></select></div></div><label>Nama Lengkap *</label><input type="text" id="nama" placeholder="Ahmad Supardi"><div class="grid-2"><div><label>No. KTP *</label><input type="text" id="ktp" placeholder="5271xxxxxxxxx"></div><div><label>No. HP *</label><input type="tel" id="hp" placeholder="081234567890"></div></div><label>Alamat Lengkap *</label><input type="text" id="alamat" placeholder="Dusun Montong Gading, RT/RW"><label>Nama Pasangan</label><input type="text" id="namaPasangan" placeholder="Siti Aminah"><label>No. HP Pasangan</label><input type="tel" id="hpPasangan" placeholder="081234567891"><hr style="margin:15px 0;border:none;border-top:2px dashed #e2e8f0"><label>Plapon Pinjaman (Rp) *</label><div class="input-group"><input type="number" id="plapon" value="500000" placeholder="Ketik manual" onchange="hitungTotal()"><button type="button" class="btn-blue btn-small" onclick="showPlaponList()">Pilih</button></div><select id="plaponList" style="display:none;margin-top:8px" onchange="setPlapon()"><option value="">-- Pilih Plapon Cepat --</option><option value="100000">Rp 100.000</option><option value="200000">Rp 200.000</option><option value="300000">Rp 300.000</option><option value="400000">Rp 400.000</option><option value="500000">Rp 500.000</option><option value="600000">Rp 600.000</option><option value="700000">Rp 700.000</option><option value="800000">Rp 800.000</option><option value="900000">Rp 900.000</option><option value="1000000">Rp 1.000.000</option><option value="1500000">Rp 1.500.000</option><option value="2000000">Rp 2.000.000</option></select><label>Tenor (Minggu) *</label><input type="number" id="tenor" value="12" placeholder="Ketik 1-52 minggu" min="1" max="52" onchange="hitungTotal()"><label>Tanggal Cair *</label><input type="date" id="tglCair"><div class="form-row"><div><label>Pinjaman Ke- *</label><input type="number" id="pinjamanKe" value="1" min="1"></div><div><label>Status *</label><select id="statusPinjaman"><option value="Normal">Normal</option><option value="Konpensasi">Konpensasi</option><option value="Restruktur">Restruktur</option></select></div></div><label>Jenis Anggunan *</label><select id="jenisAnggunan" onchange="toggleJaminan()"><option value="">-- Pilih Anggunan --</option><option value="BPKB">BPKB Motor/Mobil</option><option value="SHM">SHM Tanah/Rumah</option></select><div class="jaminan-box" id="boxBPKB"><label>No. BPKB *</label><input type="text" id="noBPKB" placeholder="G12345678"><div class="grid-2"><div><label>Atas Nama *</label><input type="text" id="namaBPKB" placeholder="Ahmad Supardi"></div><div><label>No. Polisi *</label><input type="text" id="nopol" placeholder="DR 1234 AB"></div></div><div class="grid-2"><div><label>Merk/Tipe</label><input type="text" id="merkMotor" placeholder="Honda Beat"></div><div><label>Tahun</label><input type="number" id="tahunMotor" placeholder="2020"></div></div></div><div class="jaminan-box" id="boxSHM"><label>No. SHM *</label><input type="text" id="noSHM" placeholder="12345"><div class="grid-2"><div><label>Atas Nama *</label><input type="text" id="namaSHM" placeholder="Ahmad Supardi"></div><div><label>Luas Tanah (m2) *</label><input type="number" id="luasTanah" placeholder="100"></div></div><label>Alamat Tanah *</label><input type="text" id="alamatTanah" placeholder="Dusun Montong Gading, RT 01/RW 02"></div><div class="info-hitung"><div class="detail-row"><span>Plapon:</span><span id="showPlapon">Rp 500.000</span></div><div class="detail-row"><span>Jasa (1.5%/minggu):</span><span id="showJasa">Rp 90.000</span></div><div class="detail-row"><span><b>Total Pelunasan:</b></span><span id="showTotal"><b>Rp 590.000</b></span></div><div class="detail-row"><span>Angsuran/Minggu:</span><span id="showAngsuran"><b>Rp 49.167</b></span></div></div><button class="btn" id="btnSimpan" onclick="simpanNasabah()">💾 Simpan Data Nasabah</button><button class="btn btn-red" id="btnBatal" onclick="batalEdit()" style="display:none;margin-top:8px">❌ Batal Edit</button></div></div>
+  <div id="pengaturan" class="page hidden"><div class="card"><h3>⚙️ Tema & Setting</h3><p style="margin-bottom:16px;">Pilih warna tema K4S Pro Max:</p><div style="display:flex;gap:16px;flex-wrap:wrap"><button class="theme-btn" style="background:#14b8a6" onclick="gantiTema('#14b8a6','#f59e0b')">Tosca</button><button class="theme-btn" style="background:#1e40af" onclick="gantiTema('#1e40af','#f59e0b')">Biru</button><button class="theme-btn" style="background:#dc2626" onclick="gantiTema('#dc2626','#ffffff')">Merah</button><button class="theme-btn" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)" onclick="gantiTema('#8b5cf6','#ec4899')">
