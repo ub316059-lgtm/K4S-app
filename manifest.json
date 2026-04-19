@@ -1,0 +1,10 @@
+{
+  "name": "K4S - Koperasi Syariah Empat Sekawan",
+  "short_name": "K4S",
+  "description": "Aplikasi Koperasi Offline",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#14b8a6",
+  "orientation": "portrait"
+}
